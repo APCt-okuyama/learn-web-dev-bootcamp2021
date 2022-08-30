@@ -1,6 +1,6 @@
-# mongo db
+# Azure で mongo db
 
-azure で mongo db (document db)
+azure で mongo db (document db) を始める
 
 ## mongo db on docker
 
@@ -109,26 +109,20 @@ db.cats.replaceOne
 
 ### [Delete]
 ```
+# {name:'ccc'}を1件削除
 db.cats.deleteOne({name:'ccc'})
 
-# すべて削除
+# 条件なしはすべて削除
 db.dogs.deleteMany({})
 ```
 
-演算子いろいろ
+### 演算子いろいろ
 ```
 db.dogs.find({age:{ $gt: 20 }})
 db.dogs.find({age:{ $lt: 20 }})
 db.dogs.find({age:{ $ne: 20 }})
 db.dogs.find({age:{ $in: [1,2,3] }})
 db.dogs.find({age:{ $nin: [1,2,3] }})
-```
-
-## mongoose ( node js + mongo db )
-node js の ライブラリ mongoose
-ORM と ODM(Document/Data Mapper), モデル定義, CRUD
-
-```
 ```
 
 # Azure Cosmos DB (mongo api)
@@ -154,7 +148,8 @@ az cosmosdb mongodb database create --account-name example02cosmosaccount --reso
 az cosmosdb mongodb collection create --account-name example02cosmosaccount --resource-group az-mongodb-example --database-name my-mongo-db1 --name my-collection1
 ```
 
-docker cli (mongosh) を使って接続してみる(接続文字列をそのまま利用)
+## mongosh (docker cli) を使って接続
+(接続文字列をそのまま利用)
 ```
 docker run -it --rm mongo mongosh "mongodb://example03cosmosaccount:xxx ... "
 
@@ -174,4 +169,12 @@ my-mongo-01> db.movies.find()
     __v: 0
   }
 ]
+```
+
+
+## アプリから mongoose を使って操作
+mongoose とは node js の ライブラリ。
+ORM と ODM(Document/Data Mapper), モデル定義, CRUD
+
+```
 ```
