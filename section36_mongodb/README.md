@@ -40,7 +40,7 @@ animal>
 ```
 
 ### bson
-jsonではなく `bson` (binary JSON) を利用する。
+jsonではなく `bson` (binary JSON) を利用。
 ※ `bson` はバイナリとしてデータを扱う
 ※ `bson` にはdate型がある
 
@@ -134,24 +134,24 @@ az group create -n az-mongodb-example -l japaneast
 #az group delete -n az-mongodb-example
 
 # Create a Cosmos account for MongoDB API
-az cosmosdb create --name example03cosmosaccount --resource-group az-mongodb-example --kind MongoDB --server-version 4.2
+az cosmosdb create --name example02account --resource-group az-mongodb-example --kind MongoDB --server-version 4.0
 ```
 
 ## azure cosmos db
 ```
-az cosmosdb mongodb database create --account-name example02cosmosaccount --resource-group az-mongodb-example --name my-mongo-db1
+az cosmosdb mongodb database create --account-name example02account --resource-group az-mongodb-example --name my-mongo-db1
 ```
 
 ## collection (option)
 ※アプリ側からも作成されるので作成は必須ではない
 ```
-az cosmosdb mongodb collection create --account-name example02cosmosaccount --resource-group az-mongodb-example --database-name my-mongo-db1 --name my-collection1
+az cosmosdb mongodb collection create --account-name example02account --resource-group az-mongodb-example --database-name my-mongo-db1 --name my-collection1
 ```
 
 ## mongosh (docker cli) を使って接続
 (接続文字列をそのまま利用)
 ```
-docker run -it --rm mongo mongosh "mongodb://example03cosmosaccount:xxx ... "
+docker run -it --rm mongo mongosh "mongodb://example02account:xxx ... "
 
 test> db.version()
 4.0.0
@@ -175,6 +175,11 @@ my-mongo-01> db.movies.find()
 ## アプリから mongoose を使って操作
 mongoose とは node js の ライブラリ。
 ORM と ODM(Document/Data Mapper), モデル定義, CRUD
+REPLの使い方
+```
+```
 
+# Azure で Mongo DB を利用する
+cosmos db
 ```
 ```
