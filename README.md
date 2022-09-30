@@ -30,3 +30,5 @@ https://www.udemy.com/course/the-web-developer-bootcamp-2021-japan/
 
 https://unsplash.com/ja
 
+# まとめ
+とりあえず８割視聴した。
