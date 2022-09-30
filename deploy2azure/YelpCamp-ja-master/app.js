@@ -1,4 +1,6 @@
+console.log('start:',process.env.NODE_ENV )
 if (process.env.NODE_ENV !== 'production') {
+    console.log('start dotenv')
     require('dotenv').config();
 }
 const express = require('express');
@@ -13,18 +15,26 @@ const passport = require('passport');
 const LocalStrategy = require('passport-local');
 const User = require('./models/user');
 const helmet = require('helmet');
-
+console.log('start.')
 const mongoSanitize = require('express-mongo-sanitize');
 
 const userRoutes = require('./routes/users');
 const campgroundRoutes = require('./routes/campgrounds');
 const reviewRoutes = require('./routes/reviews');
 
+console.log('start MongoStore');
 const MongoStore = require('connect-mongo');
 
 const dbUrl = process.env.DB_URL || 'mongodb://localhost:27017/yelp-camp';
 mongoose.connect(dbUrl,
+// console.log('start mongoose.connect:', process.env.COSMOSDB_PASSWORD)
+// mongoose.connect("mongodb://"+process.env.COSMOSDB_HOST+":"+process.env.COSMOSDB_PORT+"/"+process.env.COSMOSDB_DBNAME+"?ssl=true&replicaSet=globaldb",
     {
+        dbName: 'yelp-camp',
+        auth: {
+            username: process.env.COSMOSDB_USER,
+            password: process.env.COSMOSDB_PASSWORD
+        },
         useNewUrlParser: true,
         useUnifiedTopology: true,
         useCreateIndex: true,
@@ -58,7 +68,10 @@ const store = MongoStore.create({
     crypto: {
         secret
     },
-    touchAfter: 24 * 3600 // time period in seconds
+    //for Azure Cosmos DB
+    autoRemove: 'interval',
+    autoRemoveInterval: 10 // In minutes. Default
+    //touchAfter: 24 * 3600 // time period in seconds
 });
 
 store.on('error', e => {
@@ -151,5 +164,5 @@ app.use((err, req, res, next) => {
 
 const port = process.env.PORT || 3000
 app.listen(port, () => {
-    console.log(`ポート${port}でリクエスト待受中...`);
+    console.log(`ポート${port}でリクエスト待受中です...`);
 });
