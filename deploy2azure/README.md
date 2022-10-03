@@ -1,5 +1,11 @@
 # Azure App Service へデプロイ
 
+想定するデプロイ環境
+２種類試します。
+1. ソースコードからデプロイ
+2. カスタムコンテナを利用したデプロイ
+![image](./deployToAppService.png)
+
 linux(wsl)で作業
 ```
 cat /etc/os-release 
@@ -12,7 +18,8 @@ node js
 node -v 
 v14.18.1
 ```
-## local 実行
+
+## まずは local PC で実行して動作確認
 ```
 npm install
 npm run start
