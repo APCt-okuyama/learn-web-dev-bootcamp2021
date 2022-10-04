@@ -161,10 +161,10 @@ az keyvault secret set --vault-name "yelpcamp-example-kv" --name "<xxxxx>" --val
 
 App Serviceがアクセスできるようにポリシーを設定
 ```
-az keyvault set-policy --name yelpcamp-example-kv --object-id 0ebc8184-b547-4761-9200-9781f722b786 --secret-permissions get
+az keyvault set-policy --name yelpcamp-example-kv --object-id a64e13a8-6635-4919-be90-faa02650195f --secret-permissions get
 ```
 
 App Serviceの設定
 ```
-@Microsoft.KeyVault(SecretUri=https://yelpcamp-example-kv.vault.azure.net//secrets/ExamplePassword/xxx)
+@Microsoft.KeyVault(SecretUri=https://yelpcamp-example-kv.vault.azure.net/secrets/ExamplePassword/xxx)
 ```
