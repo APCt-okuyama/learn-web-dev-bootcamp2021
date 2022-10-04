@@ -1,8 +1,7 @@
 # infra (terraformのサンプル)
 
+この環境(赤枠の部分)をterraformで実装する例
 ![image](../deployToAppService.png)
-
-この環境をterraformで実装する例
 
 ## 作成する Azure リーソース
 ・Resource Group
