@@ -1,4 +1,6 @@
-
+/**
+ * このコメントは terraform-docs でそのまま出力されます
+ */
 
 # resource group
 resource "azurerm_resource_group" "example" {

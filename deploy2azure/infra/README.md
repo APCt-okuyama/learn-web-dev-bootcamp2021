@@ -87,5 +87,9 @@ resource "azurerm_key_vault_secret" "example2" {
 }
 ```
 
-## document
+## document (terraform-docs)
+terraform-docs という ツール があります。
 
+```
+/usr/local/terraform-docs markdown table --output-file sample-terraform-docs.md --output-mode inject ./
+```
