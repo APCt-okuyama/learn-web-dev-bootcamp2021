@@ -10,7 +10,7 @@ resource "random_string" "projectno" {
 
 # 関数や他リソースの参照などが利用可能
 locals {
-  rg_name = "yelp-camp-${random_string.projectno.result}"
+  rg_name = "oku-b2c-example1-${random_string.projectno.result}"
   location = "japaneast"
 
   # cosmos
@@ -19,11 +19,14 @@ locals {
 
   # app service
   appservice_plan_name = "appsrv-plan-${random_string.projectno.result}"
-  appservice_name = "appsrv-yelp-camp-${random_string.projectno.result}"
+  appservice_name = "appsrv-sampleapp-${random_string.projectno.result}"
 
   # key vault
-  keyvault_name = "yelp-camp-kv-${random_string.projectno.result}"
+  keyvault_name = "example-kv-${random_string.projectno.result}"
 
-  # countainer registory
-    
+  # azure storage blob
+
+  blob_storage_ac_name = "examplestorageacc${random_string.projectno.result}"
+  spa_container_name = "spa-container-${random_string.projectno.result}"  
+  spa_index_document_name = "index.html"
 }

@@ -110,7 +110,7 @@ resource "azurerm_linux_web_app" "example" {
 
   site_config {
     application_stack {
-      node_version = "16-lts"
+      node_version = "14-lts"
     }
   }
 
@@ -128,6 +128,7 @@ resource "azurerm_linux_web_app" "example" {
   }  
 }
 # key vault のアクセスポリシーにapp serviceを追加
+#  ※注意 設定が有効になるまでに少し時間がかかる？　
 resource "azurerm_key_vault_access_policy" "example" {
   key_vault_id = azurerm_key_vault.example.id
   tenant_id    = data.azurerm_client_config.current.tenant_id
@@ -137,7 +138,27 @@ resource "azurerm_key_vault_access_policy" "example" {
   ]
 }
 
-# outpuにデプロイ用のコマンドを表示
-# (e.g.) az webapp up -n my-yelpcamp-service -g $RG_NAME -p MyAppServicePlan -l japaneast
+# azure blob storage webホスティング用
+resource "azurerm_storage_account" "example" {
+  name                     = "${local.blob_storage_ac_name}"
+  resource_group_name      = azurerm_resource_group.example.name
+  location                 = azurerm_resource_group.example.location
+  account_tier             = "Standard"
+  account_replication_type = "LRS"
+  account_kind             = "StorageV2"
+  # static web を有効に。
+  static_website {
+    index_document = "${local.spa_index_document_name}"
+  }  
+}
 
+resource "azurerm_storage_blob" "example" {
+  name                   = "${local.spa_index_document_name}"
+  storage_account_name   = azurerm_storage_account.example.name
+  storage_container_name = "$web"
+  type                   = "Block"
+  content_type           = "text/html"
+
+  source_content         = "<h1>This is coming from azure storage.</h1><p>You can deploy your awsome contents(spa).</p><h2>Azure CLI</h2><p>az storage blob upload-batch -s SOURCE-PATH -d '$web' --account-name ${local.blob_storage_ac_name}</p>"
+}
 # container registory

@@ -1,26 +1,44 @@
-# infra (terraformのサンプル)
+# terraform で YelpCamp のリソースをAzureへデプロイする
 
 この環境(赤枠の部分)をterraformで実装する例
 ![image](../deployToAppService.png)
+
+## (Option) 本番や実践的な運用にむけて
+
+Terraformの状態(terraform.tfstate) は 既定ではローカルに格納されますが次の理由から理想的ではない。
+・ローカルの状態は、チーム環境または共同作業環境ではあまり実用的でない。
+・Terraform 状態に機密情報が含まれる可能性がある。
+・状態をローカルに格納すると、不注意で削除される可能性が高くなる。
+
+[こちらの手順](https://learn.microsoft.com/ja-jp/azure/developer/terraform/store-state-in-azure-storage?tabs=azure-cli)に従って Terraformの状態(terraform.tfstate) をリモートで管理することを検証しましょう。
 
 ## 作成する Azure リーソース
 ・Resource Group
 ・AppService
 ・Cosmos DB
 ・Container Registory
+・Storage
 ・Key Vault
 
 ## ファイル構成
 ```
 tree
 .
+├── .gitignore # terraform用の.gitignore
 ├── README.md
 ├── locals.tf
-├── main.tf ※ここですべて作成しています。
+├── main.tf
 ├── output.tf
 ├── provider.tf
+├── sample-terraform-docs.md # terraform-docsで作成された Document(Markdown形式)
+├── terraform.tfstate
+├── terraform.tfstate.backup
 └── variables.tf
 ```
+
+※ terraform用の.gitignore は https://github.com/github/gitignore/blob/main/Terraform.gitignore を利用。
+
+を利用
 
 ## terraformコマンド実行
 ※ tfenvをいれておく
